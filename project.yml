@@ -53,3 +53,28 @@ targets:
         INFOPLIST_FILE: NotificationService/Info.plist
         CODE_SIGN_ENTITLEMENTS: NotificationService/NotificationService.entitlements
         GENERATE_INFOPLIST_FILE: false
+
+  # Runs on the simulator in CI, which needs no signing identity and no device.
+  # This is how the project is verified at all by an author with neither a Mac
+  # nor an iPhone.
+  DialBridgeTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests
+    dependencies:
+      - target: DialBridge
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.gruncode.dialbridge.tests
+        GENERATE_INFOPLIST_FILE: true
+
+schemes:
+  DialBridge:
+    build:
+      targets:
+        DialBridge: all
+        DialBridgeTests: [test]
+    test:
+      targets:
+        - DialBridgeTests
