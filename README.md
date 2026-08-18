@@ -54,20 +54,26 @@ flowchart LR
 
 ## Can I just install it?
 
-Not yet — and it is worth being blunt about why, because it is Apple's rule
-rather than a missing feature.
+Not yet, because no signed build is published. iOS runs only apps Apple has
+signed for, and unlike Android there is no "download the file and allow it"
+route.
 
-There is no download here, and there cannot be a casual one. iOS only installs
-apps that Apple has signed for, so you need a **paid Apple Developer
-membership** (about $99 a year) plus either a Mac to install from or a
-TestFlight build to install through. A free Apple ID will not do: personal
-teams are barred from both push notifications and App Groups, and this app
-needs both.
+**Today, the only way in is to build it yourself** — which needs your own paid
+Apple Developer membership, about $99 a year. A free Apple ID is not enough:
+personal teams are barred from push notifications and App Groups, and this app
+needs both. You will also need a Mac to install from, or your own TestFlight
+build.
 
-If you have an iPhone and want to try it, the honest sequence is: get the
-membership, build it (locally or in CI), and install via Xcode or TestFlight.
+**If this is ever published, installing it will be free.** The membership is
+paid by whoever publishes, not by whoever installs. Users of a TestFlight or
+App Store build need nothing beyond an ordinary Apple ID, and one membership
+covers every user — TestFlight allows up to 10,000 testers.
 
-The Android version has none of this friction — [download the APK and go](https://github.com/gruncode/browser-dial/releases/latest).
+So the $99 is a publisher's cost that has not been paid here, not a price on
+the software.
+
+Meanwhile the Android version has none of this friction —
+[download the APK and go](https://github.com/gruncode/browser-dial/releases/latest).
 
 ---
 
