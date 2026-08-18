@@ -54,8 +54,21 @@ flowchart LR
 
 ## Building
 
-You need macOS with Xcode. There is no way around this — iOS builds cannot be
-produced on Linux or Windows.
+**You do not need a Mac to build or verify this project.** Every push is
+compiled and tested on GitHub's macOS runners, which are free for public
+repositories, and the simulator tests need no Apple Developer membership. This
+project is developed on Linux; CI is what checks it.
+
+macOS with Xcode is needed for two things: working on it interactively — the
+visual editor, the debugger — and installing onto a physical iPhone from your
+own machine.
+
+Even the device install has a way round: with signing credentials in CI, the
+macOS runner can archive, sign and upload to TestFlight, and you install from
+there without owning a Mac. That is not configured here, but it is the usual
+route for developers without Apple hardware.
+
+To work on it locally, on a Mac:
 
 ```bash
 brew install xcodegen
