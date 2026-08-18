@@ -1,0 +1,50 @@
+name: Build and test
+
+# Compiles and tests on GitHub's macOS runners — free for public repositories,
+# and the only way this project is verified at all: it was written on a Linux
+# machine by an author with no Mac and no iPhone.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ios:
+    name: iOS build and unit tests
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate the Xcode project
+        run: xcodegen generate
+
+      # The simulator needs no signing identity, so this runs without any
+      # Apple Developer membership. It proves the Swift compiles, both targets
+      # link, and — through CryptoTests — that CryptoKit agrees with the
+      # browser's Web Crypto output byte for byte.
+      # No xcpretty in the pipeline: it is not guaranteed on the runner, and a
+      # missing formatter failing the build would tell us nothing useful.
+      - name: Build and test
+        run: |
+          xcodebuild test \
+            -project DialBridge.xcodeproj \
+            -scheme DialBridge \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15' \
+            CODE_SIGNING_ALLOWED=NO
+
+  relay:
+    name: Relay tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: APNs authentication tests
+        working-directory: relay
+        run: node test/jwt.test.js
