@@ -1,8 +1,8 @@
 name: Build and test
 
 # Compiles and tests on GitHub's macOS runners — free for public repositories,
-# and the only way this project is verified at all: it was written on a Linux
-# machine by an author with no Mac and no iPhone.
+# and the only thing that verifies this project at all: it was written on a
+# Linux machine by an author with no Mac and no iPhone.
 on:
   push:
     branches: [main]
@@ -12,7 +12,10 @@ on:
 jobs:
   ios:
     name: iOS build and unit tests
-    runs-on: macos-14
+    # macos-15 carries Xcode 16. Older images fail before compiling anything:
+    # Homebrew installs the current XcodeGen, which writes project format 77,
+    # and Xcode 15 refuses to open it.
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
 
@@ -22,19 +25,33 @@ jobs:
       - name: Generate the Xcode project
         run: xcodegen generate
 
-      # The simulator needs no signing identity, so this runs without any
-      # Apple Developer membership. It proves the Swift compiles, both targets
-      # link, and — through CryptoTests — that CryptoKit agrees with the
-      # browser's Web Crypto output byte for byte.
-      # No xcpretty in the pipeline: it is not guaranteed on the runner, and a
-      # missing formatter failing the build would tell us nothing useful.
+      # Runner images change their preinstalled simulators without warning, so
+      # the device is discovered rather than hardcoded.
+      - name: Choose a simulator
+        id: sim
+        run: |
+          NAME=$(xcrun simctl list devices available \
+                 | grep -oE 'iPhone [0-9]+[A-Za-z ]*' \
+                 | head -1 | sed 's/[[:space:]]*$//')
+          if [ -z "$NAME" ]; then
+            echo "No iPhone simulator available on this runner" >&2
+            xcrun simctl list devices available >&2
+            exit 1
+          fi
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          echo "Using simulator: $NAME"
+
+      # The simulator needs no signing identity, so this runs without any Apple
+      # Developer membership. It proves the Swift compiles, both targets link,
+      # and — through CryptoTests — that CryptoKit agrees with the browser's
+      # Web Crypto output byte for byte.
       - name: Build and test
         run: |
           xcodebuild test \
             -project DialBridge.xcodeproj \
             -scheme DialBridge \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15' \
+            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }}" \
             CODE_SIGNING_ALLOWED=NO
 
   relay:
