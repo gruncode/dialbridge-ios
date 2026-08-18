@@ -23,7 +23,9 @@ struct ContentView: View {
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                         .keyboardType(.URL)
-                        .onChange(of: relay) { _, newValue in
+                        // The two-parameter closure is iOS 17+; this project
+                        // targets 16, where onChange passes only the new value.
+                        .onChange(of: relay) { newValue in
                             Pairing.relay = newValue
                             refresh()
                         }
