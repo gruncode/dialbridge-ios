@@ -1,15 +1,16 @@
 # DialBridge for iOS
 
+[![Build and test](https://github.com/gruncode/dialbridge-ios/actions/workflows/build.yml/badge.svg)](https://github.com/gruncode/dialbridge-ios/actions/workflows/build.yml)
+
 Click a phone number in your computer's browser; your iPhone offers to call it.
 
 The iOS companion to [DialBridge](https://github.com/gruncode/dialbridge).
 **The same browser extension drives both** — the pairing code format is shared,
 so nothing on the desktop side changes when you switch phones.
 
-> **Status: early.** The relay is tested and the design is complete, but the
-> Swift has not yet been compiled — it was written on a Linux machine, and iOS
-> builds need macOS. Treat it as a careful draft until someone runs it through
-> Xcode. See [What is and isn't proven](#what-is-and-isnt-proven).
+> **Status:** compiles and passes its tests on macOS CI, including the check
+> that CryptoKit decrypts what the browser encrypts. Not yet run on a physical
+> iPhone. See [What is and isn't proven](#what-is-and-isnt-proven).
 
 ---
 
@@ -130,10 +131,15 @@ Honesty about test coverage, since this is a young port:
 | | Status |
 |---|---|
 | Relay's Apple authentication (ES256, r\|\|s encoding, token caching) | Tested — `relay/test/jwt.test.js` |
-| Relay input validation | Tested |
-| Crypto wire format | The browser's output is proven to decrypt under the identical format in the Android project; CryptoKit's combined sealed box is that same layout |
-| Swift compiles, project generates | **Not yet** — no macOS available to the author |
+| Swift compiles, both targets link, project generates | Tested on every push — macOS CI |
+| CryptoKit decrypts what the browser encrypts | Tested — `Tests/CryptoTests.swift` runs a fixture produced by the extension's own Web Crypto code |
+| Tamper, wrong-key and malformed-input rejection | Tested |
 | End-to-end on a physical iPhone | **Not yet** — needs a device and a paid Apple account |
+
+The author has neither a Mac nor an iPhone; everything above is verified by
+GitHub's macOS runners, which are free for public repositories. The simulator
+needs no signing identity, so the tests run without an Apple Developer
+membership.
 
 If you run it on a real device, opening an issue with what happened would be
 genuinely useful.
