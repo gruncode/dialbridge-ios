@@ -1,5 +1,5 @@
 {
-  "name": "dialbridge-ios-relay",
+  "name": "browser-dial-ios-relay",
   "version": "1.0.0",
   "description": "Forwards encrypted dial requests to Apple Push Notification service. Stateless, dependency-free, and cannot read what it forwards.",
   "main": "index.js",

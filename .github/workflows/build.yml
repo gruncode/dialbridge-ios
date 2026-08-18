@@ -48,8 +48,8 @@ jobs:
       - name: Build and test
         run: |
           xcodebuild test \
-            -project DialBridge.xcodeproj \
-            -scheme DialBridge \
+            -project BrowserDial.xcodeproj \
+            -scheme BrowserDial \
             -sdk iphonesimulator \
             -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }}" \
             CODE_SIGNING_ALLOWED=NO

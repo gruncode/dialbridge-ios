@@ -16,7 +16,7 @@
 //   APNS_KEY      contents of the .p8 file from Apple (keep it secret)
 //   APNS_KEY_ID   the 10-character key identifier
 //   APNS_TEAM_ID  your 10-character Apple team identifier
-//   APNS_TOPIC    the app's bundle id, e.g. com.gruncode.dialbridge
+//   APNS_TOPIC    the app's bundle id, e.g. com.gruncode.browserdial
 //   APNS_ENV      "sandbox" while developing, "production" for TestFlight/App Store
 
 const http2 = require("node:http2");

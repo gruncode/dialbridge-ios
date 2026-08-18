@@ -3,7 +3,7 @@ import UIKit
 import UserNotifications
 
 @main
-struct DialBridgeApp: App {
+struct BrowserDialApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {
@@ -92,5 +92,5 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
 }
 
 extension Notification.Name {
-    static let pairingChanged = Notification.Name("dialbridge.pairingChanged")
+    static let pairingChanged = Notification.Name("browserdial.pairingChanged")
 }

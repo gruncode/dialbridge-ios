@@ -10,7 +10,7 @@
          needs the same encryption key to decrypt an arriving push. -->
     <key>com.apple.security.application-groups</key>
     <array>
-        <string>group.com.gruncode.dialbridge</string>
+        <string>group.com.gruncode.browserdial</string>
     </array>
 </dict>
 </plist>

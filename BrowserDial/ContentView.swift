@@ -94,7 +94,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationTitle("DialBridge")
+            .navigationTitle("BrowserDial")
         }
         .onReceive(NotificationCenter.default.publisher(for: .pairingChanged)) { _ in
             refresh()

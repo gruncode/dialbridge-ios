@@ -1,10 +1,10 @@
-# DialBridge for iOS
+# Browser Dial for iOS
 
-[![Build and test](https://github.com/gruncode/dialbridge-ios/actions/workflows/build.yml/badge.svg)](https://github.com/gruncode/dialbridge-ios/actions/workflows/build.yml)
+[![Build and test](https://github.com/gruncode/browser-dial-ios/actions/workflows/build.yml/badge.svg)](https://github.com/gruncode/browser-dial-ios/actions/workflows/build.yml)
 
 Click a phone number in your computer's browser; your iPhone offers to call it.
 
-The iOS companion to [DialBridge](https://github.com/gruncode/dialbridge).
+The iOS companion to [Browser Dial](https://github.com/gruncode/browser-dial).
 **The same browser extension drives both** — the pairing code format is shared,
 so nothing on the desktop side changes when you switch phones.
 
@@ -16,7 +16,7 @@ so nothing on the desktop side changes when you switch phones.
 
 ## How it differs from the Android version, and why
 
-Android's DialBridge can hold its own connection to a message server, which is
+Android's Browser Dial can hold its own connection to a message server, which is
 what lets it avoid Google entirely. **iOS cannot do that.** Apple does not permit
 background sockets, and every push must travel through Apple's own service. So
 the independence the Android app offers is simply not available here — the
@@ -73,7 +73,7 @@ To work on it locally, on a Mac:
 ```bash
 brew install xcodegen
 xcodegen generate
-open DialBridge.xcodeproj
+open BrowserDial.xcodeproj
 ```
 
 The Xcode project is generated from [`project.yml`](project.yml) rather than
@@ -83,7 +83,7 @@ diffs and constant merge conflicts.
 For a real device you also need an Apple Developer membership (about $99 a
 year), because push notifications require a provisioning profile with the push
 entitlement. Set your team identifier in `project.yml`, and register the App
-Group `group.com.gruncode.dialbridge` for both targets.
+Group `group.com.gruncode.browserdial` for both targets.
 
 **Push does not work in the simulator.** The app will show "Not registered yet"
 and produce no pairing code, which is correct behaviour rather than a fault.
@@ -101,7 +101,7 @@ cd relay
 APNS_KEY="$(cat AuthKey_XXXXXXXXXX.p8)" \
 APNS_KEY_ID=XXXXXXXXXX \
 APNS_TEAM_ID=YYYYYYYYYY \
-APNS_TOPIC=com.gruncode.dialbridge \
+APNS_TOPIC=com.gruncode.browserdial \
 APNS_ENV=sandbox \
   node -e 'require("./index.js")'
 ```

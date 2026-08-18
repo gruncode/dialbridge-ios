@@ -1,6 +1,6 @@
 # Privacy and data protection
 
-DialBridge for iOS moves a phone number from a browser to a phone. A phone
+BrowserDial for iOS moves a phone number from a browser to a phone. A phone
 number identifies a person, so it is personal data, and this says what happens
 to it.
 

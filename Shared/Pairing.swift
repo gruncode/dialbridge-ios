@@ -8,7 +8,7 @@ import Foundation
 enum Pairing {
 
     /// Must match the App Group in both targets' entitlements.
-    static let appGroup = "group.com.gruncode.dialbridge"
+    static let appGroup = "group.com.gruncode.browserdial"
 
     private enum Key {
         static let secret = "secret"        // AES key, base64url

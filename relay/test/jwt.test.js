@@ -18,7 +18,7 @@ const { privateKey, publicKey } = crypto.generateKeyPairSync("ec", {
 process.env.APNS_KEY = privateKey;
 process.env.APNS_KEY_ID = "ABCDE12345";
 process.env.APNS_TEAM_ID = "TEAM123456";
-process.env.APNS_TOPIC = "com.gruncode.dialbridge";
+process.env.APNS_TOPIC = "com.gruncode.browserdial";
 
 const relay = require("../index.js");
 
