@@ -52,6 +52,25 @@ flowchart LR
 
 ---
 
+## Can I just install it?
+
+Not yet — and it is worth being blunt about why, because it is Apple's rule
+rather than a missing feature.
+
+There is no download here, and there cannot be a casual one. iOS only installs
+apps that Apple has signed for, so you need a **paid Apple Developer
+membership** (about $99 a year) plus either a Mac to install from or a
+TestFlight build to install through. A free Apple ID will not do: personal
+teams are barred from both push notifications and App Groups, and this app
+needs both.
+
+If you have an iPhone and want to try it, the honest sequence is: get the
+membership, build it (locally or in CI), and install via Xcode or TestFlight.
+
+The Android version has none of this friction — [download the APK and go](https://github.com/gruncode/browser-dial/releases/latest).
+
+---
+
 ## Building
 
 **You do not need a Mac to build or verify this project.** Every push is
