@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Push. Change to "production" for a TestFlight or App Store build. -->
+    <key>aps-environment</key>
+    <string>development</string>
+
+    <!-- Shared storage: the notification extension is a separate process and
+         needs the same encryption key to decrypt an arriving push. -->
+    <key>com.apple.security.application-groups</key>
+    <array>
+        <string>group.com.gruncode.dialbridge</string>
+    </array>
+</dict>
+</plist>

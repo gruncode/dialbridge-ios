@@ -1,0 +1,23 @@
+# Generated from project.yml by XcodeGen — never committed.
+*.xcodeproj/
+*.xcworkspace/
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+.swiftpm/
+
+# Apple credentials. The .p8 signing key is a secret: it authenticates every
+# push your relay sends, and anyone holding it can push to your users.
+*.p8
+*.p12
+*.mobileprovision
+*.certSigningRequest
+
+# Node
+relay/node_modules/
+
+# OS noise
+.DS_Store

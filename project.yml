@@ -1,0 +1,55 @@
+# XcodeGen specification.
+#
+# The Xcode project file is generated from this rather than committed. A
+# .pbxproj is a large machine-written blob that produces unreadable diffs and
+# constant merge conflicts; this file says the same thing in fifty readable
+# lines, and CI regenerates the project on every build.
+#
+#   brew install xcodegen && xcodegen generate && open DialBridge.xcodeproj
+
+name: DialBridge
+options:
+  bundleIdPrefix: com.gruncode
+  deploymentTarget:
+    iOS: "16.0"        # UNNotificationServiceExtension and CryptoKit are older
+                       # than this, but 16 keeps SwiftUI's navigation modern
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    # Filled in by whoever builds for a real device. Left empty so the project
+    # generates and compiles in CI without an Apple account.
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+
+targets:
+  DialBridge:
+    type: application
+    platform: iOS
+    sources:
+      - path: DialBridge
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.gruncode.dialbridge
+        INFOPLIST_FILE: DialBridge/Info.plist
+        CODE_SIGN_ENTITLEMENTS: DialBridge/DialBridge.entitlements
+        GENERATE_INFOPLIST_FILE: false
+    dependencies:
+      - target: NotificationService
+
+  NotificationService:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: NotificationService
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.gruncode.dialbridge.NotificationService
+        INFOPLIST_FILE: NotificationService/Info.plist
+        CODE_SIGN_ENTITLEMENTS: NotificationService/NotificationService.entitlements
+        GENERATE_INFOPLIST_FILE: false
